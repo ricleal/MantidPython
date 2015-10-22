@@ -4,37 +4,45 @@
 __author__ = "Ricardo M. Ferraz Leal"
 
 """
-
 Convert corrected GPSANS file (NOT REDUCED!) in detector space to GRASP
-
 """
-
-MANTID_PATH = "/home/rhf/git/mantid/Build/bin"
-
-FILENAME = '/home/rhf/git/MantidPython/gpsans_to_grasp/data/corrected_data.nxs'
-
-
-#For the SANS detector, the (1,1) position is the bottom left corner as seen from the sample position. -->
-DETECTOR_WIDTH = 192
-DETECTOR_HIGH = 256
-
+import os
+import logging, logging.config
+import ConfigParser as configparser
 import sys
-sys.path.append(MANTID_PATH)
-
-import mantid.simpleapi as api
 import numpy as np
+import argparse
 
-import logging
-logging.basicConfig(level=logging.DEBUG)
+CONFIG_FILE = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+'config.cfg')
+config = configparser.ConfigParser()
+config.read([CONFIG_FILE, os.path.expanduser('~/.convert_to_grasp.cfg')])
+
+logging.config.fileConfig(CONFIG_FILE, disable_existing_loggers=False)
 logger = logging.getLogger()
 
+sys.path.append(config.get('Mantid','path'))
+
+def parse_args():
+    '''
+    parse command line input arguments
+    '''
+    parser = argparse.ArgumentParser(description='Convert Mantid NeXus corrected to Grasp.')
+    parser.add_argument('-i', '--infile', help='Mantid Corrected Nexus file to read the data', required=True)
+    parser.add_argument('-t', '--templatefile', help='Instrument RAW data template file.', required=True)
+    parser.add_argument('-o', '--outfile', help='Output file (data from the nexus file + metadata from the raw file)', required=True)
+    args = vars(parser.parse_args())
+    return args
+
 def plot2d(data):
+    logger.debug("Plotting 2D linear...")
     import matplotlib.pyplot as plt
     plt.imshow(data,
         aspect=0.5)
     plt.show()
 
 def plot2d_log(data):
+    logger.debug("Plotting 2D log...")
     import matplotlib.pyplot as plt
     from matplotlib.colors import LogNorm
     plt.imshow(data,
@@ -43,30 +51,28 @@ def plot2d_log(data):
         aspect=0.5)
     plt.show()
 
-def read_data(filename = FILENAME):
-    ws = api.Load(filename)
-
-    # instrument = ws.getInstrument()
-    # sample = ws.getInstrument().getSample()
-    # source = ws.getInstrument().getSource()
-    # samplePos = sample.getPos()
-
-    # detector1 = instrument.getComponentByName('detector1')
-    # print "Sample - Detector vector:", detector1.getPos()-sample.getPos()
-    # print "Sample - Detector distance:", detector1.getDistance(sample)
-
-    #data = np.empty([DETECTOR_WIDTH * DETECTOR_HIGH])
+def read_data(filename):
+    logger.info("Reading Mantid file: %s"%filename)
+    import mantid.simpleapi as api
+    detector_width = config.getint('Instrument','detector_width')
+    detector_high = config.getint('Instrument','detector_high')
+    try:
+        ws = api.Load(filename)
+    except Exception,e:
+        logger.error("Cannot read Mantid file %s"%filename)
+        logger.exception(e)
+        sys.exit(-1)
 
     data = [ws.readY(i) for i in range(ws.getNumberHistograms()) if not ws.getDetector(i).isMonitor()]
-    print "Data size =", len(data), ". Detector size:", DETECTOR_WIDTH*DETECTOR_HIGH
+    logger.debug("Data size = %d. Detector size = %d." % (len(data),detector_width*detector_high))
 
     data = np.array(data, dtype=np.int32)
     #data = data.reshape([DETECTOR_HIGH,DETECTOR_WIDTH])
     #data = np.rot90(data,1)
-    data = data.reshape([DETECTOR_HIGH,DETECTOR_WIDTH])
+    data = data.reshape([detector_width,detector_high])
     data = np.rot90(data,2)
 
-    print "Data shape =", data.shape
+    logger.debug("Data shape = %s." % str(data.shape))
     return data
 
 def parse_xml(filename_in, filename_out, key_values_substitution):
@@ -84,7 +90,8 @@ def parse_xml(filename_in, filename_out, key_values_substitution):
         if tag is not None:
             tag.text = v
         else:
-            print "ERROR:", k, "does not exist in the file", filename_in
+            logger.error("%s does not exist in the file %s." %(k,filename_in))
+    logger.info("Writting data to %s...."%filename_out)
     tree.write(filename_out)
 
 def numpy_array_to_string(data):
@@ -94,13 +101,14 @@ def numpy_array_to_string(data):
     return s.getvalue()
 
 def main(argv):
-    data = read_data()
+    args = parse_args()
+    data = read_data(args['infile'])
 
     # # Set negative to 0
     data_to_plot = data.clip(min=0.01)
     plot2d_log(data_to_plot)
 
-    parse_xml('0001.xml', '0002.xml',
+    parse_xml(args['templatefile'], args['outfile'],
         {'Data/Detector': numpy_array_to_string(data) })
 
 
