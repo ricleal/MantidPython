@@ -73,7 +73,7 @@ def read_data(filename):
     #data = data.reshape([DETECTOR_HIGH,DETECTOR_WIDTH])
     #data = np.rot90(data,1)
     data = data.reshape([detector_width,detector_high])
-    data = np.rot90(data,2)
+    #data = np.rot90(data,2)
 
     logger.debug("Data shape = %s." % str(data.shape))
     return data
