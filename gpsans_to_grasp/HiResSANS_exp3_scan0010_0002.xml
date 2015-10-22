@@ -1,81 +1,82 @@
-<SPICErack SPICE_version="1.7" end_time="2015-07-23 15:09:31" filename="HiResSANS_exp3_scan0010_0001.xml" start_time="2015-07-23 14:39:19">
-<Header>
-<Instrument>HiResSANS</Instrument>
-<Reactor_Power type="FLOAT32">85.000000</Reactor_Power>
-<Experiment_Title>ipts 14323 high entropy alloys</Experiment_Title>
-<Experiment_number type="INT32">3</Experiment_number>
-<Command>scan n=0 preset time 1800</Command>
-<Builtin_Command>scan n 0 preset time 1800</Builtin_Command>
-<Users>Lou Santodonato</Users>
-<Local_Contact>KCL LDS</Local_Contact>
-<Scan_Number type="INT32">10</Scan_Number>
-<Scan_Title>bar1 p8 Al1CoCrN 0 A scat</Scan_Title>
-<Sample_Name />
-<Sample_Changer />
-<Sample_Thickness type="FLOAT32" units="cm">0.000000</Sample_Thickness>
-<Sample_CountRate type="FLOAT32">2215.901111</Sample_CountRate>
-<Transmission>False</Transmission>
-<Transmission_for_Scan type="INT32">-1</Transmission_for_Scan>
-<Detector_Sensitivity_Run_Number type="INT32">0</Detector_Sensitivity_Run_Number>
-<Beam_Blocked_Run_Number type="INT32">0</Beam_Blocked_Run_Number>
-<Empty_Run_Number type="INT32">0</Empty_Run_Number>
-<Number_of_X_Pixels type="INT32">192</Number_of_X_Pixels>
-<Number_of_Y_Pixels type="INT32">192</Number_of_Y_Pixels>
-<x_mm_per_pixel type="FLOAT32">5.152200</x_mm_per_pixel>
-<y_mm_per_pixel type="FLOAT32">5.146200</y_mm_per_pixel>
-<beam_center_x_pixel type="FLOAT32">0.000000</beam_center_x_pixel>
-<beam_center_y_pixel type="FLOAT32">0.000000</beam_center_y_pixel>
-<absolute_intensity_constant type="FLOAT32">0.000000</absolute_intensity_constant>
-<source_aperture_size type="FLOAT32">20.000000</source_aperture_size>
-<sample_aperture_size type="FLOAT32">2.500000</sample_aperture_size>
-<beamtrap_diameter type="FLOAT32">0.000000</beamtrap_diameter>
-<source_distance type="FLOAT32">17210.200000</source_distance>
-<sample_to_flange type="FLOAT32">285.000000</sample_to_flange>
-<sample_aperture_to_flange type="FLOAT32">285.000000</sample_aperture_to_flange>
-<tank_internal_offset type="FLOAT32">749.000000</tank_internal_offset>
-<wavelength type="FLOAT32">8.000000</wavelength>
-<wavelength_spread type="FLOAT32">0.150000</wavelength_spread>
-<Comment>none</Comment>
-<ImagePath>Images/HiResSANS_exp3_scan0010_0001.png</ImagePath>
-</Header>
-<Motor_Positions>
-<highvoltagecmd description="High Voltage ON OFF Device" pos="1.00000" type="FLOAT32" units="mm">1.000000</highvoltagecmd>
-<selector_speed description="Velocity Selector speed" pos="3104.60000" type="FLOAT32" units="rpm">3104.600000</selector_speed>
-<selector_tilt description="Velocity Selector angle" pos="0.00000" type="FLOAT32" units="deg">0.000000</selector_tilt>
-<coll_1 description="SANS Collimator #1" pos="aperture" type="FLOAT32" units="mm">101.288533</coll_1>
-<coll_2 description="SANS Collimator #2" pos="open" type="FLOAT32" units="mm">2.134768</coll_2>
-<coll_3 description="SANS Collimator #3" pos="open" type="FLOAT32" units="mm">2.136038</coll_3>
-<coll_4 description="SANS Collimator #4" pos="open" type="FLOAT32" units="mm">3.410649</coll_4>
-<coll_5 description="SANS Collimator #5" pos="open" type="FLOAT32" units="mm">1.610246</coll_5>
-<coll_6 description="SANS Collimator #6" pos="open" type="FLOAT32" units="mm">2.521445</coll_6>
-<coll_7 description="SANS Collimator #7" pos="open" type="FLOAT32" units="mm">3.342462</coll_7>
-<coll_8 description="SANS Collimator #8" pos="open" type="FLOAT32" units="mm">3.120441</coll_8>
-<nguides description="Number of guides" pos="0.00000" type="FLOAT32" units="number">0.000000</nguides>
-<attenuator_pos description="Attenuator stage position" pos="open" type="FLOAT32" units="mm">52.997100</attenuator_pos>
-<beam_trap_x description="Beamtrap X position (mm)" pos="80.00004" type="FLOAT32" units="mm">80.000043</beam_trap_x>
-<dcal description="Detector Calibration Bar (mm)" pos="4.99978" type="FLOAT32" units="mm">4.999777</dcal>
-<detector_trans description="Horizontal detector translation (mm)" pos="1.00000" type="FLOAT32" units="mm">0.999998</detector_trans>
-<sample_det_dist description="Control the distance from the sample to the detector." pos="18.50000" type="FLOAT32" units="m">18.500000</sample_det_dist>
-<sample_x description="Sample Changer X stage position emag" pos="62.23984" type="FLOAT32" units="mm">62.239837</sample_x>
-<trap_y_101mm description="200mm Beamtrap Y position" pos="1.00005" type="FLOAT32" units="mm">1.000049</trap_y_101mm>
-<trap_y_25mm description="25mm Beamtrap Y position" pos="1.00005" type="FLOAT32" units="mm">1.000049</trap_y_25mm>
-<trap_y_50mm description="40mm Beamtrap Y position" pos="1.00005" type="FLOAT32" units="mm">1.000049</trap_y_50mm>
-<trap_y_76mm description="100mm Beamtrap Y position" pos="542.00003" type="FLOAT32" units="mm">542.000034</trap_y_76mm>
-</Motor_Positions>
-<Parameter_Positions>
-<hvsts1 description="High voltage Power Supply feedback" pos="1175.00000" type="FLOAT32" units="V">1175.000000</hvsts1>
-<hvsts2 description="High voltage Power Supply feedback" pos="1174.00000" type="FLOAT32" units="V">1174.000000</hvsts2>
-<hvsts3 description="High voltage Power Supply feedback" pos="1167.00000" type="FLOAT32" units="V">1167.000000</hvsts3>
-<mag_current description="Read Genesys power supply current setpoint." pos="0.013000" type="FLOAT32" units="A">0.013000</mag_current>
-</Parameter_Positions>
-<Counters>
-<time description="Counting time." type="FLOAT32" units="sec">1800.000000</time>
-<detector description="Detector counts." type="FLOAT32" units="counts">4517268.000000</detector>
-<monitor description="Monitor counts." type="FLOAT32" units="counts">3988622.000000</monitor>
-</Counters>
-<Data description="Raw counts from detector">
+<?xml version="1.0" encoding="utf-8"?><SPICErack SPICE_version="1.7" end_time="2015-07-23 15:09:31" filename="HiResSANS_exp3_scan0010_0001.xml" start_time="2015-07-23 14:39:19">  
+  <Header>    
+    <Instrument>HiResSANS</Instrument>    
+    <Reactor_Power type="FLOAT32">85.000000</Reactor_Power>    
+    <Experiment_Title>ipts 14323 high entropy alloys</Experiment_Title>    
+    <Experiment_number type="INT32">3</Experiment_number>    
+    <Command>scan n=0 preset time 1800</Command>    
+    <Builtin_Command>scan n 0 preset time 1800</Builtin_Command>    
+    <Users>Lou Santodonato</Users>    
+    <Local_Contact>KCL LDS</Local_Contact>    
+    <Scan_Number type="INT32">10</Scan_Number>    
+    <Scan_Title>bar1 p8 Al1CoCrN 0 A scat</Scan_Title>    
+    <Sample_Name/>    
+    <Sample_Changer/>    
+    <Sample_Thickness type="FLOAT32" units="cm">0.000000</Sample_Thickness>    
+    <Sample_CountRate type="FLOAT32">2215.901111</Sample_CountRate>    
+    <Transmission>False</Transmission>    
+    <Transmission_for_Scan type="INT32">-1</Transmission_for_Scan>    
+    <Detector_Sensitivity_Run_Number type="INT32">0</Detector_Sensitivity_Run_Number>    
+    <Beam_Blocked_Run_Number type="INT32">0</Beam_Blocked_Run_Number>    
+    <Empty_Run_Number type="INT32">0</Empty_Run_Number>    
+    <Number_of_X_Pixels type="INT32">192</Number_of_X_Pixels>    
+    <Number_of_Y_Pixels type="INT32">192</Number_of_Y_Pixels>    
+    <x_mm_per_pixel type="FLOAT32">5.152200</x_mm_per_pixel>    
+    <y_mm_per_pixel type="FLOAT32">5.146200</y_mm_per_pixel>    
+    <beam_center_x_pixel type="FLOAT32">0.000000</beam_center_x_pixel>    
+    <beam_center_y_pixel type="FLOAT32">0.000000</beam_center_y_pixel>    
+    <absolute_intensity_constant type="FLOAT32">0.000000</absolute_intensity_constant>    
+    <source_aperture_size type="FLOAT32">20.000000</source_aperture_size>    
+    <sample_aperture_size type="FLOAT32">2.500000</sample_aperture_size>    
+    <beamtrap_diameter type="FLOAT32">0.000000</beamtrap_diameter>    
+    <source_distance type="FLOAT32">17210.200000</source_distance>    
+    <sample_to_flange type="FLOAT32">285.000000</sample_to_flange>    
+    <sample_aperture_to_flange type="FLOAT32">285.000000</sample_aperture_to_flange>    
+    <tank_internal_offset type="FLOAT32">749.000000</tank_internal_offset>    
+    <wavelength type="FLOAT32">8.000000</wavelength>    
+    <wavelength_spread type="FLOAT32">0.150000</wavelength_spread>    
+    <Comment>none</Comment>    
+    <ImagePath>Images/HiResSANS_exp3_scan0010_0001.png</ImagePath>    
+  </Header>  
+  <Motor_Positions>    
+    <highvoltagecmd description="High Voltage ON OFF Device" pos="1.00000" type="FLOAT32" units="mm">1.000000</highvoltagecmd>    
+    <selector_speed description="Velocity Selector speed" pos="3104.60000" type="FLOAT32" units="rpm">3104.600000</selector_speed>    
+    <selector_tilt description="Velocity Selector angle" pos="0.00000" type="FLOAT32" units="deg">0.000000</selector_tilt>    
+    <coll_1 description="SANS Collimator #1" pos="aperture" type="FLOAT32" units="mm">101.288533</coll_1>    
+    <coll_2 description="SANS Collimator #2" pos="open" type="FLOAT32" units="mm">2.134768</coll_2>    
+    <coll_3 description="SANS Collimator #3" pos="open" type="FLOAT32" units="mm">2.136038</coll_3>    
+    <coll_4 description="SANS Collimator #4" pos="open" type="FLOAT32" units="mm">3.410649</coll_4>    
+    <coll_5 description="SANS Collimator #5" pos="open" type="FLOAT32" units="mm">1.610246</coll_5>    
+    <coll_6 description="SANS Collimator #6" pos="open" type="FLOAT32" units="mm">2.521445</coll_6>    
+    <coll_7 description="SANS Collimator #7" pos="open" type="FLOAT32" units="mm">3.342462</coll_7>    
+    <coll_8 description="SANS Collimator #8" pos="open" type="FLOAT32" units="mm">3.120441</coll_8>    
+    <nguides description="Number of guides" pos="0.00000" type="FLOAT32" units="number">0.000000</nguides>    
+    <attenuator_pos description="Attenuator stage position" pos="open" type="FLOAT32" units="mm">52.997100</attenuator_pos>    
+    <beam_trap_x description="Beamtrap X position (mm)" pos="80.00004" type="FLOAT32" units="mm">80.000043</beam_trap_x>    
+    <dcal description="Detector Calibration Bar (mm)" pos="4.99978" type="FLOAT32" units="mm">4.999777</dcal>    
+    <detector_trans description="Horizontal detector translation (mm)" pos="1.00000" type="FLOAT32" units="mm">0.999998</detector_trans>    
+    <sample_det_dist description="Control the distance from the sample to the detector." pos="18.50000" type="FLOAT32" units="m">18.500000</sample_det_dist>    
+    <sample_x description="Sample Changer X stage position emag" pos="62.23984" type="FLOAT32" units="mm">62.239837</sample_x>    
+    <trap_y_101mm description="200mm Beamtrap Y position" pos="1.00005" type="FLOAT32" units="mm">1.000049</trap_y_101mm>    
+    <trap_y_25mm description="25mm Beamtrap Y position" pos="1.00005" type="FLOAT32" units="mm">1.000049</trap_y_25mm>    
+    <trap_y_50mm description="40mm Beamtrap Y position" pos="1.00005" type="FLOAT32" units="mm">1.000049</trap_y_50mm>    
+    <trap_y_76mm description="100mm Beamtrap Y position" pos="542.00003" type="FLOAT32" units="mm">542.000034</trap_y_76mm>    
+  </Motor_Positions>  
+  <Parameter_Positions>    
+    <hvsts1 description="High voltage Power Supply feedback" pos="1175.00000" type="FLOAT32" units="V">1175.000000</hvsts1>    
+    <hvsts2 description="High voltage Power Supply feedback" pos="1174.00000" type="FLOAT32" units="V">1174.000000</hvsts2>    
+    <hvsts3 description="High voltage Power Supply feedback" pos="1167.00000" type="FLOAT32" units="V">1167.000000</hvsts3>    
+    <mag_current description="Read Genesys power supply current setpoint." pos="0.013000" type="FLOAT32" units="A">0.013000</mag_current>    
+  </Parameter_Positions>  
+  <Counters>    
+    <time description="Counting time." type="FLOAT32" units="sec">1800.000000</time>    
+    <detector description="Detector counts." type="FLOAT32" units="counts">4517268.000000</detector>    
+    <monitor description="Monitor counts." type="FLOAT32" units="counts">3988622.000000</monitor>    
+  </Counters>  
+  <Data description="Raw counts from detector">    
 
-<Detector type="INT32[192,256]">0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	-1	1	2	0	0	0	1	-1	1	1	0	0	1	0	-2	0	1	0	1	0	0	0	2	0	1	1	0	0	0	-2	1	0	0	0	1	-1	0	0	-2	1	1	0	1	1	-1	0	-1	0	0	-1	1	0	1	-1	-1	0	1	2	1	0	0	0	0	-1	1	1	0	0	1	0	1	0	1	0	1	0	0	0	1	0	0	1	0	1	0	1	1	-2	0	1	0	0	1	0	0	0	1	1	0	0	0	0	1	0	1	2	1	0	0	0	0	0	1	0	1	1	0	0	0	0	0	1	-1	-2	1	1	1	1	0	0	1	1	0	0	1	0	-1	0	1	2	2	0	-1	2	-1	2	1	2	0	0	0	0	1	0	1	0	2	0	1	0	0	0	-1	-1	0	0	1	1	1	-1	1	0	2	1	0	2	0	1	0	-1	0	1	0	1	0	0	0	0	1	0	0	0	0	0	0	1	1	1	-1	0	0	0	0	0	0	0	0	0	1	2	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+    <Detector type="INT32[192,256]">
+0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	-1	1	2	0	0	0	1	-1	1	1	0	0	1	0	-2	0	1	0	1	0	0	0	2	0	1	1	0	0	0	-2	1	0	0	0	1	-1	0	0	-2	1	1	0	1	1	-1	0	-1	0	0	-1	1	0	1	-1	-1	0	1	2	1	0	0	0	0	-1	1	1	0	0	1	0	1	0	1	0	1	0	0	0	1	0	0	1	0	1	0	1	1	-2	0	1	0	0	1	0	0	0	1	1	0	0	0	0	1	0	1	2	1	0	0	0	0	0	1	0	1	1	0	0	0	0	0	1	-1	-2	1	1	1	1	0	0	1	1	0	0	1	0	-1	0	1	2	2	0	-1	2	-1	2	1	2	0	0	0	0	1	0	1	0	2	0	1	0	0	0	-1	-1	0	0	1	1	1	-1	1	0	2	1	0	2	0	1	0	-1	0	1	0	1	0	0	0	0	1	0	0	0	0	0	0	1	1	1	-1	0	0	0	0	0	0	0	0	0	1	2	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2	3	0	4	4	1	2	0	1	-1	4	0	0	0	2	0	0	0	0	2	1	0	-1	1	2	1	2	0	0	2	2	1	0	4	1	1	0	1	-2	0	2	-1	2	-2	0	1	2	0	0	2	2	3	0	1	0	0	1	1	0	1	0	0	1	1	1	-1	1	0	3	0	-1	2	0	2	3	1	0	-1	-1	-3	0	0	0	0	3	0	1	0	0	0	0	0	0	0	2	0	2	0	-1	2	4	2	0	1	1	2	2	0	0	5	0	0	1	0	3	2	3	0	0	2	0	4	0	0	-1	3	0	0	1	0	0	0	0	1	1	1	1	0	0	0	0	2	1	0	1	1	3	1	1	-2	2	2	0	0	1	-3	-3	0	-3	3	1	1	0	2	0	1	0	0	0	0	1	2	0	2	0	0	0	1	0	2	0	0	0	0	2	1	4	0	1	1	0	0	1	1	-1	-1	0	1	2	0	0	1	-1	1	1	2	0	-1	0	-1	3	1	-1	2	1	2	0	-1	-2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0	1	2	0	1	0	0	1	1	0	0	0	2	2	1	0	-1	0	-1	-2	-2	3	0	1	0	0	0	1	0	0	1	0	0	0	2	0	2	1	0	2	-1	2	0	0	0	1	1	1	0	2	-1	-2	0	0	0	1	2	0	0	1	-1	0	0	1	0	1	0	0	0	1	0	0	2	0	0	0	0	0	1	1	0	1	-1	1	1	2	0	0	0	0	0	2	0	1	0	0	0	0	1	2	0	0	0	-1	0	0	-2	0	0	-1	0	1	1	0	0	-1	0	0	1	-2	1	1	0	0	0	-1	0	0	-1	0	0	0	0	0	0	0	0	-1	0	0	0	0	0	0	1	0	0	0	2	1	1	0	0	-1	-1	1	1	1	2	0	1	0	0	0	-1	1	1	0	1	0	1	1	0	0	2	0	0	0	0	1	0	0	0	2	1	1	-2	0	0	0	0	0	1	0	-1	1	0	0	1	0	0	0	-2	-2	1	0	1	0	0	-1	-1	1	-1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	1	1	2	-1	0	0	0	0	0	0	0	0	3	0	0	1	2	1	1	-1	1	-1	3	1	0	5	3	1	0	4	4	0	1	0	1	0	0	1	0	2	0	2	3	1	0	1	2	0	1	0	1	0	0	1	0	1	0	1	2	3	0	2	0	1	-1	1	0	-1	1	2	0	-1	2	3	0	-1	0	-2	1	4	2	-1	1	3	0	0	3	2	0	-1	2	2	0	3	0	0	1	2	-2	3	0	1	0	0	2	1	1	0	0	0	0	0	0	2	1	3	0	2	-1	3	0	0	1	0	0	0	0	-1	0	0	-1	0	0	0	-2	0	1	0	0	2	0	3	2	0	1	4	0	2	1	3	2	0	0	0	1	2	1	3	0	2	2	0	2	0	0	0	1	1	0	-1	-2	1	3	-1	0	1	1	1	0	0	2	0	2	0	1	0	1	1	-1	1	0	0	0	0	1	0	0	0	-2	-2	3	0	-1	2	2	0	0	3	0	2	-1	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
@@ -267,6 +268,6 @@
 0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4	3	1	2	5	3	1	5	6	7	8	3	6	6	6	7	4	6	2	8	5	6	3	6	4	4	3	4	4	4	3	5	4	6	3	3	4	7	6	6	5	4	4	5	4	5	6	7	6	4	6	7	7	4	2	8	5	6	5	8	7	5	9	5	3	6	4	7	4	2	1	5	7	6	6	4	6	9	8	6	3	8	10	7	9	7	9	7	5	7	8	7	9	3	9	8	3	5	6	6	7	7	10	11	7	11	10	10	7	9	14	11	13	15	10	10	13	12	11	9	11	11	7	11	10	10	9	6	9	11	10	8	7	7	6	7	6	10	9	5	6	7	5	8	4	9	5	8	5	7	8	5	6	8	8	2	7	6	12	8	3	7	7	6	7	7	5	2	6	6	5	7	7	8	5	4	2	5	4	5	9	6	4	0	9	5	6	4	4	5	7	7	6	3	9	7	9	3	6	7	2	5	4	3	8	4	10	8	10	5	4	5	8	5	5	8	7	8	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4	2	4	0	1	3	5	6	3	4	0	-1	4	1	1	6	2	4	3	0	4	0	5	1	1	3	4	3	2	2	6	4	7	3	3	7	1	0	2	1	5	5	7	2	5	4	3	2	3	2	0	3	4	4	2	3	4	0	3	6	3	4	7	8	4	3	4	3	2	4	6	7	3	5	5	6	7	0	6	3	1	8	7	1	2	7	3	3	5	6	5	5	6	5	3	4	4	0	8	7	8	8	7	7	5	8	7	10	7	10	8	10	6	6	10	8	9	7	7	10	8	5	6	8	11	8	6	6	6	8	4	5	8	3	4	2	8	3	4	4	5	5	5	6	6	8	4	4	6	4	6	4	8	5	5	3	4	7	2	5	0	5	3	5	3	4	1	3	0	2	8	3	5	3	1	4	4	7	6	3	4	7	7	6	6	3	7	4	4	4	6	2	1	3	0	5	3	7	5	5	4	5	3	4	5	6	5	5	7	3	6	6	3	5	5	0	0	5	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4	5	5	5	1	4	5	8	4	6	4	4	5	3	6	4	3	4	6	6	5	7	1	6	3	8	3	5	3	3	4	5	4	3	5	7	5	3	6	5	4	8	0	5	2	7	2	2	7	1	4	6	4	8	2	5	5	7	3	3	3	2	7	1	4	9	3	4	5	5	11	7	5	7	7	8	5	2	4	4	6	4	4	2	1	6	7	4	5	8	3	10	7	7	4	10	7	9	7	8	9	9	8	7	8	7	7	9	11	10	10	12	12	13	7	12	7	8	7	7	8	6	6	7	7	5	9	8	10	8	5	5	7	8	8	7	5	8	10	7	6	7	6	7	6	5	2	6	6	5	7	4	7	5	5	5	6	2	5	4	3	6	5	6	5	1	6	2	4	6	4	5	10	6	5	6	3	6	5	4	3	4	6	4	7	8	3	2	7	6	7	4	1	8	2	4	5	6	4	7	5	5	9	4	6	1	5	4	-1	5	4	3	5	6	4	7	4	3	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-</Detector>
-</Data>
+</Detector>    
+  </Data>  
 </SPICErack>
