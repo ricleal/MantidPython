@@ -12,10 +12,12 @@ import ConfigParser as configparser
 import sys
 import numpy as np
 import argparse
+from pprint import pprint, pformat
 
 CONFIG_FILE = os.path.join(os.path.abspath(os.path.dirname(__file__)),
 'config.cfg')
 config = configparser.ConfigParser()
+config.optionxform=str # case insensitive
 config.read([CONFIG_FILE, os.path.expanduser('~/.convert_to_grasp.cfg')])
 
 logging.config.fileConfig(CONFIG_FILE, disable_existing_loggers=False)
@@ -55,6 +57,11 @@ def plot2d_log(data):
     plt.show()
 
 def read_data(filename):
+    '''
+    Reads the mantid data into a numpy array
+    Ignores the monitors
+    Reshapes the data in 2D as the detector
+    '''
     logger.info("Reading Mantid file: %s"%filename)
     import mantid.simpleapi as api
     detector_width = config.getint('Instrument','detector_width')
@@ -68,13 +75,8 @@ def read_data(filename):
 
     data = [ws.readY(i) for i in range(ws.getNumberHistograms()) if not ws.getDetector(i).isMonitor()]
     logger.debug("Data size = %d. Detector size = %d." % (len(data),detector_width*detector_high))
-
     data = np.array(data, dtype=np.int32)
-    #data = data.reshape([DETECTOR_HIGH,DETECTOR_WIDTH])
-    #data = np.rot90(data,1)
     data = data.reshape([detector_width,detector_high])
-    #data = np.rot90(data,2)
-
     logger.debug("Data shape = %s." % str(data.shape))
     return data
 
@@ -110,6 +112,7 @@ def parse_xml(filename_in, filename_out, key_values_substitution):
         #tree.find('idinfo/timeperd/timeinfo/rngdates/begdate').text = '1/1/2011'
         tag = root.find(k)
         if tag is not None:
+            logger.debug("Replacing tag '%s' in the XML..."%(k))
             tag.text = v
         else:
             logger.error("%s does not exist in the file %s." %(k,filename_in))
@@ -125,19 +128,37 @@ def numpy_array_to_string(data):
     np.savetxt(s, data, delimiter='\t', fmt='%d')
     return s.getvalue()
 
+def get_tag_values_to_replace(data,tag_pairs):
+    '''
+    Build a dictionary of the form
+    {
+     'Data/Detector': '0\t0\t0\....'
+     'Header/Comment': 'Coment XPTO',
+     'Header/Sample_Name': 'Xpto 2000'
+    }
+    These pairs will be replaced in the XML
+    '''
+    data_tag = config.get('Instrument','data_tag')
+    to_replace_dic = {data_tag: numpy_array_to_string(data) }
+    for k,v in tag_pairs:
+        to_replace_dic[k]=v
+    return to_replace_dic
+
+
 def main(argv):
     args = parse_args()
+
     data = read_data(args['infile'])
 
-    # # Set negative to 0
+    # # Set negative to 0 for plotting
     data_to_plot = data.clip(min=0.01)
     if args['plot'] == 'log':
         plot2d_log(data_to_plot)
     elif args['plot'] == 'linear':
         plot2d(data_to_plot)
 
-    parse_xml(args['templatefile'], args['outfile'],
-        {'Data/Detector': numpy_array_to_string(data) })
+    pairs = get_tag_values_to_replace(data,config.items('Substitutions'))
+    parse_xml(args['templatefile'], args['outfile'],pairs)
 
 
 if __name__ == "__main__":
