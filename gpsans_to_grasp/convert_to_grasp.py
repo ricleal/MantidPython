@@ -56,7 +56,11 @@ def plot2d_log(data):
         aspect=0.5)
     plt.show()
 
-def read_data(filename):
+def get_metadata (mantid_ws):
+    run = mantid_ws.getRun()
+    return { k : run.getLogData(k).value for k in run.keys()}
+
+def read_data_and_metadata(filename):
     '''
     Reads the mantid data into a numpy array
     Ignores the monitors
@@ -77,8 +81,14 @@ def read_data(filename):
     logger.debug("Data size = %d. Detector size = %d." % (len(data),detector_width*detector_high))
     data = np.array(data, dtype=np.int32)
     data = data.reshape([detector_width,detector_high])
+    metadata = get_metadata (ws)
     logger.debug("Data shape = %s." % str(data.shape))
-    return data
+    logger.debug(pformat(metadata))
+    return data,metadata
+
+
+
+
 
 def prettify(elem):
     """
@@ -130,7 +140,7 @@ def numpy_array_to_string(data):
 
 def get_tag_values_to_replace(data,tag_pairs):
     '''
-    Build a dictionary of the form
+    @param tag_pairs:
     {
      'Data/Detector': '0\t0\t0\....'
      'Header/Comment': 'Coment XPTO',
@@ -148,7 +158,7 @@ def get_tag_values_to_replace(data,tag_pairs):
 def main(argv):
     args = parse_args()
 
-    data = read_data(args['infile'])
+    data,metadata = read_data_and_metadata(args['infile'])
 
     # # Set negative to 0 for plotting
     data_to_plot = data.clip(min=0.01)
