@@ -31,7 +31,6 @@ def parse_args():
     '''
     parser = argparse.ArgumentParser(description='Convert Mantid NeXus corrected to Grasp.')
     parser.add_argument('-i', '--infile', help='Mantid Corrected Nexus file to read the data', required=True)
-    parser.add_argument('-t', '--templatefile', help='Instrument RAW data template file.', required=True)
     parser.add_argument('-o', '--outfile', help='Output file (data from the nexus file + metadata from the raw file)', required=True)
     parser.add_argument('-p', '--plot', help='Ploting options',  choices=['linear','log'], required=False)
     args = vars(parser.parse_args())
@@ -60,6 +59,35 @@ def get_metadata (mantid_ws):
     run = mantid_ws.getRun()
     return { k : run.getLogData(k).value for k in run.keys()}
 
+def get_default_parameter(instrument, name):
+    """ Function gets the value of a default instrument parameter and
+            assign proper(the one defined in IPF ) type to this parameter
+            @param instrument --
+        """
+    if instrument is None:
+        raise ValueError("Cannot initiate default parameter, instrument has not been properly defined.")
+
+    type_name = instrument.getParameterType(name)
+    if type_name == "double":
+        val = instrument.getNumberParameter(name)
+    elif type_name == "bool":
+        val = instrument.getBoolParameter(name)
+    elif type_name == "string":
+        val = instrument.getStringParameter(name)
+        if val[0] == "None" :
+            return None
+    elif type_name == "int" :
+        val = instrument.getIntParameter(name)
+    else :
+        raise KeyError(" Instrument: {0} does not have parameter with name: {1}".format(instrument.getName(),name))
+    return val[0]
+
+def get_instrument_metadata (mantid_ws):
+    instrument = mantid_ws.getInstrument()
+    parameter_names = instrument.getParameterNames()
+    return { parameter_names[i] : get_default_parameter(instrument,parameter_names[i])
+            for i in range(parameter_names.size())}
+
 def read_data_and_metadata(filename):
     '''
     Reads the mantid data into a numpy array
@@ -82,55 +110,10 @@ def read_data_and_metadata(filename):
     data = np.array(data, dtype=np.int32)
     data = data.reshape([detector_width,detector_high])
     metadata = get_metadata (ws)
+    metadata.update(get_instrument_metadata(ws))
     logger.debug("Data shape = %s." % str(data.shape))
     logger.debug(pformat(metadata))
     return data,metadata
-
-
-
-
-
-def prettify(elem):
-    """
-    Return a pretty-printed XML string for the Element.
-    I also put's a new line after tag: <Detector type=(.*)>
-    As GRASP does not read the data without this \n
-    """
-    from xml.etree import ElementTree
-    from xml.dom import minidom
-    rough_string = ElementTree.tostring(elem, 'utf-8')
-    reparsed = minidom.parseString(rough_string)
-    pretty_str = reparsed.toprettyxml(indent="  ", newl="", encoding="utf-8")
-    # <Detector type="INT32[192,256]">
-    import re
-    pretty_str = re.sub(r'<Detector type=(.*)>',
-       '<Detector type=\\1>\n',
-        pretty_str)
-    return pretty_str
-
-
-def parse_xml(filename_in, filename_out, key_values_substitution):
-    """
-    Parses the XML file and will substitute
-    key_values_substitution of format:
-    {'SPICErack/Header/Sample_Name' : 'new sample name'}
-    """
-    from xml.etree import ElementTree as et
-    tree = et.parse(filename_in)
-    root = tree.getroot()
-    for k,v in key_values_substitution.items():
-        #tree.find('idinfo/timeperd/timeinfo/rngdates/begdate').text = '1/1/2011'
-        tag = root.find(k)
-        if tag is not None:
-            logger.debug("Replacing tag '%s' in the XML..."%(k))
-            tag.text = v
-        else:
-            logger.error("%s does not exist in the file %s." %(k,filename_in))
-    pretty_xml = prettify(root)
-    #tree.write(filename_out)
-    logger.info("Writting data to %s...."%filename_out)
-    with open(filename_out, "w") as text_file:
-        text_file.write(pretty_xml)
 
 def numpy_array_to_string(data):
     import io
@@ -138,21 +121,20 @@ def numpy_array_to_string(data):
     np.savetxt(s, data, delimiter='\t', fmt='%d')
     return s.getvalue()
 
-def get_tag_values_to_replace(data,tag_pairs):
+def write_to_file(filename, metadata, data):
     '''
-    @param tag_pairs:
-    {
-     'Data/Detector': '0\t0\t0\....'
-     'Header/Comment': 'Coment XPTO',
-     'Header/Sample_Name': 'Xpto 2000'
-    }
-    These pairs will be replaced in the XML
     '''
-    data_tag = config.get('Instrument','data_tag')
-    to_replace_dic = {data_tag: numpy_array_to_string(data) }
-    for k,v in tag_pairs:
-        to_replace_dic[k]=v
-    return to_replace_dic
+    logger.debug("Writting output to: %s."%filename)
+    
+    # Sort metadata by name
+    from collections import OrderedDict
+    metadata = OrderedDict(sorted(metadata.items(), key=lambda t: t[0]))
+
+    with open(filename, 'w') as f:
+        for k,v in metadata.items():
+            f.write('%s=%s\n'%(k,v))
+        f.write('\n')
+        f.write(numpy_array_to_string(data))
 
 
 def main(argv):
@@ -167,9 +149,7 @@ def main(argv):
     elif args['plot'] == 'linear':
         plot2d(data_to_plot)
 
-    pairs = get_tag_values_to_replace(data,config.items('Substitutions'))
-    parse_xml(args['templatefile'], args['outfile'],pairs)
-
+    write_to_file(args['outfile'], metadata, data)
 
 if __name__ == "__main__":
     main(sys.argv)
