@@ -87,16 +87,20 @@ class Raw(Exporter):
     def __init__(self, *args, **kwargs):
         logger.info("Exporting as Raw")
         super(Raw, self).__init__(*args, **kwargs)
+
+    def _compile_data_in_a_single_dic(self):
+        d = self.metadata.copy()
+        d.update(self.instrument_metadata.copy())
+        d.update(self.user_metadata.copy())
+        OrderedDict(sorted(d.items(), key=lambda t: t[0]))
+        return d
+
     def export(self):
         '''
         '''
         logger.info("Writing output to: %s."%self.filename)
         with open(self.filename, 'w') as f:
-            for k,v in self.metadata.items():
-                f.write('%s=%s\n'%(k,v))
-            for k,v in self.instrument_metadata.items():
-                f.write('%s=%s\n'%(k,v))
-            for k,v in self.user_metadata.items():
+            for k,v in self._compile_data_in_a_single_dic().items():
                 f.write('%s=%s\n'%(k,v))
             f.write('\n')
             f.write(self.data)
