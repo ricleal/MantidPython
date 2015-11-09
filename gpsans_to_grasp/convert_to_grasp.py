@@ -4,13 +4,13 @@
 __author__ = "Ricardo M. Ferraz Leal"
 
 import sys
-from pymantid import WorkSpace, Exporter
+from pymantid import WorkSpace
+from exporter import Exporter
 from settings import logger, args
 
 """
 Convert corrected GPSANS file (NOT REDUCED!) in detector space to GRASP
 """
-
 
 def main(argv):
     ws = WorkSpace(args['infile'])
@@ -20,11 +20,10 @@ def main(argv):
     elif args['plot'] == 'linear':
         ws.plot2d()
 
-    exporter = Exporter(args['outfile'])
-    #exporter.as_config(ws)
-    #exporter.as_json(ws)
-    exporter.as_raw(ws)
-    
+    ws.info()
+    exporter = Exporter(args['outfile'], ws)
+    exporter.export()
+
 if __name__ == "__main__":
     main(sys.argv)
     logger.info("Done!")

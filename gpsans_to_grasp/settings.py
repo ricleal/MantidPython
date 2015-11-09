@@ -10,7 +10,8 @@ import ConfigParser as configparser
 import argparse
 
 CONFIG_FILE = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'config.cfg')
-LOCAL_CONFIG_FILE = os.path.expanduser('~/.convert_to_grasp.cfg')
+#LOCAL_CONFIG_FILE = os.path.expanduser('~/.convert_to_grasp.cfg')
+LOCAL_CONFIG_FILE = os.path.join(os.path.abspath(os.path.curdir), 'metadata.cfg')
 
 def get_parse_args():
     '''
