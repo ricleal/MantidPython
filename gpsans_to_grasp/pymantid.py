@@ -7,11 +7,15 @@ Created on Oct 29, 2015
 import sys
 import os, os.path
 from settings import args, config, logger
-import matplotlib.pyplot as plt
-from matplotlib.colors import LogNorm
 import numpy as np
 from collections import OrderedDict
 from pprint import pformat
+
+import matplotlib
+matplotlib.use('qt4agg')
+
+import matplotlib.pyplot as plt
+from matplotlib.colors import LogNorm
 
 sys.path.append(config.get('Mantid', 'path'))
 import mantid.simpleapi as api
