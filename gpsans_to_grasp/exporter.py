@@ -58,7 +58,10 @@ class Exporter(object):
     def __init_data(self):
         self.metadata = OrderedDict(sorted(self.ws.metadata.items(), key=lambda t: t[0]))
         self.instrument_metadata  = OrderedDict(sorted(self.ws.instrument_metadata.items(), key=lambda t: t[0]))
-        self.user_metadata  = OrderedDict(sorted(config.items('Metadata'), key=lambda t: t[0]))
+        if config.has_section('Metadata'):
+            self.user_metadata  = OrderedDict(sorted(config.items('Metadata'), key=lambda t: t[0]))
+        else:
+            self.user_metadata = {}
         self.data = Exporter.numpy_array_to_string(self.ws.data)
 
     @abstractmethod
