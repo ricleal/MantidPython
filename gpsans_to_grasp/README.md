@@ -146,3 +146,16 @@ Example launching the converter with a a log plot of the detector:
 ```
 ./convert_to_grasp.py -i data/data.nxs -o data/data_0001.raw -p log
 ```
+
+### Additional info
+
+If more information is needed (or need to be overwritten) in the exported file, create a file `metadata.cfg` in the current directory, with pairs of key = values.
+It will be added to the exported file. Example of a `metadata.cfg`:
+```
+[Metadata]
+# Metadata to add to the output data file
+# User added. Must be where the command is called
+mag_current = 123
+attenuator_pos = 456
+sample_rotation = 789
+```
