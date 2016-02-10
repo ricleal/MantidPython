@@ -20,7 +20,7 @@ def get_parse_args():
     parser = argparse.ArgumentParser(description='Convert Mantid NeXus corrected to Grasp.')
     parser.add_argument('-i', '--infile', help='Mantid Corrected Nexus file to read the data', required=True)
     parser.add_argument('-o', '--outfile', help='Output file (data from the nexus file + metadata from the raw file)', required=True)
-    parser.add_argument('-p', '--plot', help='Ploting options',  choices=['linear','log'], required=False)
+    parser.add_argument('-p', '--plot', help='Ploting options',  choices=['linear','log','none'], required=False)
     args = vars(parser.parse_args())
     return args
 
@@ -37,7 +37,7 @@ def get_logger():
     logging.config.fileConfig(CONFIG_FILE, disable_existing_loggers=False)
     logger = logging.getLogger()
     return logger
-    
+
 
 args = get_parse_args()
 config = get_config()
